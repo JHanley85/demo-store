@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Easy</title>
+  <%= stylesheet_link_tag    "application",'//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0-rc2/css/bootstrap.min.css', media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+  <%= javascript_include_tag(
+              '//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0/js/bootstrap.min.js',
+
+      #'//cdnjs.cloudflare.com/ajax/libs/knockout-bootstrap/0.2.1/knockout-bootstrap.js'
+      ) %>
+</head>
+<body>
+  <%= javascript_include_tag   "//cdnjs.cloudflare.com/ajax/libs/holder/2.0/holder.js" %>
+
+<div class='container'>
+  <div id='page-content'>
+    <%= yield %>
+  </div>
+</div>
+
+</body>
+</html>

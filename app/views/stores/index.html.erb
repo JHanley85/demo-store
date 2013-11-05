@@ -1,0 +1,40 @@
+
+<h1>Listing stores</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Url</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @stores.each do |store| %>
+      <tr>
+        <td><%=link_to(store.user.email, '#') %></td>
+        <td><%= store.name %></td>
+        <td><%= store.description %></td>
+        <td><%= store.url %></td>
+        <td><%= button_to 'Edit', edit_store_path(store),:remote=>true,:format=>:js,:method=>:get %></td>
+        <td id='store-nav-<%= store.id %>'></td>
+      </tr>
+      <script>easy_store('<%=store.id%>','<%= store.name %>','store-nav-<%= store.id %>')</script>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Store', new_store_path %>
+
+<pre>To add easy_store:
+<%="include provided JS"%>
+<%="<script>easy_store(store #)</script>"%>
+</pre>
