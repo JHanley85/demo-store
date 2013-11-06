@@ -11,7 +11,7 @@
           <%@store.products.each do |product|%>
               <li class='panel col-md-3  container' title='<%= product.title %>'>
                 <div class="col-mid-6 pull-left">
-                  <img class="media-object" data-src="holder.js/135x135" />
+                  <%=link_to(products_path(product.id)) do%><img class="media-object" data-src="holder.js/135x135" /><%end%>
 
                   <h6 class="media-title"><%=product.title %></h6>
                   <p class="media-caption">$<%=product.price||='N/A' %></p>
@@ -22,11 +22,11 @@
 
                   <%= truncate(product.description,:omission => "... (continued)", :length => 75) %>
                 </div>
-                <span><%=button_to("EDIT",edit_product_path(:id=>product.id,:callback=>"edit-product-modal"),:format=>"js",:remote=>true,:method=>:get)%></span>
+                <span><%=content_tag(:a,"#",'data-product'=>true,:onclick=>"get_product_edit(#{product.id},'edit-product-modal')",:remote=>true,:method=>:get) do%>"EDIT"<%end%></span>
               </li>
           <%end%>
           <li class='panel col-md-3  container'>
-            <span><%=button_to(new_product_path(:callback=>"new-product-modal"),:format=>"js",:remote=>true,:method=>:get,:class=>'btn btn-large btn-light') do%>
+            <span><%=button_to(new_product_path(:callback=>"new-product-modal",:format=>"js"),:remote=>true,:method=>:get,:class=>'btn btn-large btn-light') do%>
                   <i class='icon-plus icon-large white'/>
                 Add New Product
                   <%end %>
@@ -42,6 +42,13 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
+ <script>
+     $('[data-product="true"]').click(function(e) {
+     e.preventDefault();
+         });
+     function get_product_edit(pid, callback){
+         $.ajax({url: "<%= root_url %>/products/"+pid+"/edit",complete:function(data){$('#'+callback).html(data)}})
+     };
+ </script>
 <div id="new-product-modal"></div>
 <div id="edit-product-modal"></div>

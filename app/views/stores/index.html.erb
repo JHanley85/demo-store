@@ -1,4 +1,4 @@
-
+ <%= debug root_url %>
 <h1>Listing stores</h1>
 
 <table>
@@ -25,8 +25,14 @@
         <td><%= button_to 'Edit', edit_store_path(store),:remote=>true,:format=>:js,:method=>:get %></td>
         <td id='store-nav-<%= store.id %>'></td>
       </tr>
-      <script>easy_store('<%=store.id%>','<%= store.name %>','store-nav-<%= store.id %>')</script>
-    <% end %>
+      <script>
+        $(document).ready(function(){
+          append_frame('<%=store.id%>','store-nav-<%= store.id %>');
+          easy_store('<%=store.id%>','<%= store.name %>','store-nav-<%= store.id %>');
+      }) ;
+      </script>
+
+  <% end %>
   </tbody>
 </table>
 
@@ -35,6 +41,12 @@
 <%= link_to 'New Store', new_store_path %>
 
 <pre>To add easy_store:
-<%="include provided JS"%>
-<%="<script>easy_store(store #)</script>"%>
+<%="to include provided JS"%>
+init_swag();
+  For JS - no-iframe
+<%="<script>easy_store(store #, display name, placement div)</script>"%>
+
+  For iframe
+  <%="<script>append_frame(store #, placement div)</script>"%>
+
 </pre>

@@ -1,0 +1,29 @@
+<ul style='list-style: none' class='media'>
+  <%@store.products.each do |product|%>
+      <li class='panel col-md-3  container' title='<%= product.title %>'>
+        <div class="col-mid-6 pull-left">
+          <%=link_to(product_path(product.id)) do%><img class="media-object" data-src="holder.js/135x135" /><%end%>
+
+          <h4 class="media-title"><%=product.title %></h4>
+          <h5 class="media-caption strong">$<%=product.price||='N/A' %>
+            <%= content_tag(:span, :class=>'badge') do%>
+                <%=product.count||="none"%> in stock
+            <%end%>
+          </h5>
+          <%= javascript_include_tag("//cdnjs.cloudflare.com/ajax/libs/holder/2.0/holder.js") %>
+        </div>
+        <div class="col-mid-6">
+
+          <%= truncate(product.description,:omission => "... (continued)", :length => 75) %>
+        </div>
+        <span><%=button_to("EDIT",edit_product_path(:id=>product.id,:callback=>"edit-product-modal",:format=>"js"),:remote=>true,:method=>:get)%></span>
+      </li>
+  <%end%>
+  <li class='panel col-md-3  container'>
+    <span><%=button_to(new_product_path(:callback=>"new-product-modal",:format=>"js"),:remote=>true,:method=>:get,:class=>'btn btn-large btn-light') do%>
+          <i class='icon-plus icon-large white'/>
+        Add New Product
+          <%end %>
+      </span>
+  </li>
+</ul>

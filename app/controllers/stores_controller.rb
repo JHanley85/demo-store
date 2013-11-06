@@ -1,4 +1,5 @@
 class StoresController < InheritedResources::Base
+  protect_from_forgery :except => [:edit]
   def index
     @stores=Store.all
     render
@@ -6,6 +7,7 @@ class StoresController < InheritedResources::Base
   def show
     @store=params[:id].nil? ? current_user.store : Store.find(params[:id])
     @products=@store.products
+    @container='hide'
     render
   end
   def edit

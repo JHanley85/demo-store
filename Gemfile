@@ -6,7 +6,9 @@ gem 'rails', '4.0.0'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 gem 'rack-cors', :require => 'rack/cors'
+gem "rack-xframe-options"
 
+gem 'paperclip'
 group :admin, :development do
   gem 'activeadmin', github: 'gregbell/active_admin'
   gem 'rolify'

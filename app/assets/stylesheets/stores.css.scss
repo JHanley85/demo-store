@@ -2,6 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#swagModal .modal-dialog{
-  width: 75%;
-  min-height: 90%;}
+#swagModal .modal-dialog, .swag-modal .modal-dialog{
+  width: 100%;
+  height: 90%;}
+
+.swag-modal,.swag-modal .modal-content,.swag-modal .modal-content .modal-body{
+  width: 100%;
+  height: 100%;}
+.swag-modal .modal-body .bootbox-body{height:75%;}
