@@ -33,6 +33,6 @@ class ProductsController < InheritedResources::Base
 
   private
   def product_params
-    params.require(:product).permit(:title, :description,:price,:count)
+    params.require(:product).permit(:title, :description,:price,:count,:image)
   end
 end

@@ -15,12 +15,24 @@ function append_frame(store,callback){
         var trigger="<button class='btn btn-primary btn-sm pull-right' id='store-modal'>Launch Frame Store</button>";
         var url=abs+"/stores/"+store;
         $('#'+callback).append(trigger+"<script>$('#store-modal').click(bootbox.dialog({className: 'swag-modal', message: '<iframe style=\"width: 100%;height: 100%;\" src=\""+url+"\"></iframe>',title: 'Store',callback: $(this).id=\"swagModal\"}))</script>");
-        $('.swag-modal')[0].attr("style",'width:100%;height:100%');
+        //$('.swag-modal')[0].attr("style",'width:100%;height:100%');
 }
 
 function swag_styles(){
     var style= document.createElement('style');
     style.href=abs+"/assets/stores.css";
     document.getElementsByTagName('head')[0].appendChild(style);
+}
+
+function get_height_largest_child(element){
+    var c=element.children();
+    var h=0;
+    $.each(c,function(d){
+        if($(c[d]).height()>h){h= $(c[d]).height();}
+    });
+    $.each(c,function(d){
+        $(c[d]).height(h);
+    })
+
 }
 

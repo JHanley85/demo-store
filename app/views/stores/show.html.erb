@@ -1,4 +1,4 @@
-<ul style='list-style: none' class='media'>
+<ul style='list-style: none' class='media' id='media-grid'>
   <%@store.products.each do |product|%>
       <li class='panel col-md-3  container' title='<%= product.title %>'>
         <div class="col-lg-4 pull-left">
@@ -6,19 +6,19 @@
               <%= image_tag product.image.url(:thumb), :class=>'media-object' %>
               <%end%>
 
-          <h4 class="media-title"><%=product.title %></h4>
+          <%= javascript_include_tag("//cdnjs.cloudflare.com/ajax/libs/holder/2.0/holder.js") %>
+        </div>
+        <div class="col-lg-8">
+
+          <h4 class="media-title"><%=truncate(product.title,:length=>15,:omission=>'...') %></h4>
           <h5 class="media-caption strong">$<%=product.price||='N/A' %>
             <%= content_tag(:span, :class=>'badge') do%>
                 <%=product.count||="none"%> in stock
             <%end%>
           </h5>
-          <%= javascript_include_tag("//cdnjs.cloudflare.com/ajax/libs/holder/2.0/holder.js") %>
-        </div>
-        <div class="col-lg-8">
-
           <%= truncate(product.description,:omission => "... (continued)", :length => 175) %>
         </div>
-        <span><%=button_to("EDIT",edit_product_path(:id=>product.id,:callback=>"edit-product-modal",:format=>"js"),:remote=>true,:method=>:get,:form_class=>'col-lg-8',:class=>'col-lg-12')%></span>
+        <span><%=button_to("EDIT",edit_product_path(:id=>product.id,:callback=>"edit-product-modal",:format=>"js"),:remote=>true,:method=>:get,:form_class=>'col-lg-12',:class=>'col-lg-12')%></span>
       </li>
   <%end%>
   <li class='panel col-md-3  container'>
@@ -29,3 +29,6 @@
       </span>
   </li>
 </ul>
+<script>
+    get_height_largest_child($('#media-grid'));
+</script>
