@@ -2,23 +2,23 @@
   <%@store.products.each do |product|%>
       <li class='panel col-md-3  container' title='<%= product.title %>'>
         <div class="col-lg-4 pull-left">
-          <%=link_to(product_path(product.id)) do%>
-              <%= image_tag product.image.url(:thumb), :class=>'media-object' %>
-              <%end%>
+          <%=link_to(image_tag(product.image.url(:thumb), :class=>'media-object'), product_path(product.id),:style=>"width: 135px;height: 135px;display: block;")%>
 
           <%= javascript_include_tag("//cdnjs.cloudflare.com/ajax/libs/holder/2.0/holder.js") %>
         </div>
         <div class="col-lg-8">
-
+          <%=link_to(product_path(product.id)) do%>
           <h4 class="media-title"><%=truncate(product.title,:length=>15,:omission=>'...') %></h4>
+          <%end%>
           <h5 class="media-caption strong">$<%=product.price||='N/A' %>
             <%= content_tag(:span, :class=>'badge') do%>
                 <%=product.count||="none"%> in stock
             <%end%>
           </h5>
-          <%= truncate(product.description,:omission => "... (continued)", :length => 175) %>
+          <%=raw( truncate(product.description,:omission => raw("...\n (continued)"), :length => 175)) %>
         </div>
-        <span><%=button_to("EDIT",edit_product_path(:id=>product.id,:callback=>"edit-product-modal",:format=>"js"),:remote=>true,:method=>:get,:form_class=>'col-lg-12',:class=>'col-lg-12')%></span>
+
+        <span><%=button_to("EDIT",edit_product_path(:id=>product.id,:callback=>"edit-product-modal",:format=>"js"),:remote=>true,:method=>:get,:form_class=>'container',:class=>'col-lg-12')%></span>
       </li>
   <%end%>
   <li class='panel col-md-3  container'>

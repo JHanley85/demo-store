@@ -22,7 +22,7 @@
 
                   <%= truncate(product.description,:omission => "... (continued)", :length => 75) %>
                 </div>
-                <span><%=content_tag(:a,"#",'data-product'=>true,:onclick=>"get_product_edit(#{product.id},'edit-product-modal')",:remote=>true,:method=>:get) do%>"EDIT"<%end%></span>
+                <span><%=content_tag(:a,"#",:onclick=>"get_product_edit(#{product.id},'edit-product-modal')",:remote=>true,:method=>:get) do%>"EDIT"<%end%></span>
               </li>
           <%end%>
           <li class='panel col-md-3  container'>
@@ -43,9 +43,7 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
  <script>
-     $('[data-product="true"]').click(function(e) {
-     e.preventDefault();
-         });
+
      function get_product_edit(pid, callback){
          $.ajax({url: "<%= root_url %>/products/"+pid+"/edit",complete:function(data){$('#'+callback).html(data)}})
      };
